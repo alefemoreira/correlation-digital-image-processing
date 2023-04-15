@@ -1,3 +1,8 @@
+import numpy as np
+
+from utils.stats import fit0_255
+
+
 def neighborsRGB(v, pos, dim, pivot, use_zero=True):
     m, n = dim
     i, j = pos
@@ -36,5 +41,20 @@ def neighborsRGB(v, pos, dim, pivot, use_zero=True):
     return (neighborsR, neighborsG, neighborsB)
 
 def correlation(image, mask, dim, pivot, offset=0, use_zero=True):
-    
-    pass
+    output = np.array(image, 'uint8')
+
+    for i in range(len(image)):
+        for j in range(len(image[0])):
+            neighbors = neighborsRGB(image, (i,j), dim, pivot, use_zero)
+
+            if neighbors == None:
+                output[i][j] = (0, 0, 0)
+                continue    
+
+            nr, ng, nb = neighbors # nr, ng, nb -> neighborhood r, g, b
+            
+            output[i][j][0] = fit0_255(abs(np.inner(nr, mask)) + offset)
+            output[i][j][1] = fit0_255(abs(np.inner(ng, mask)) + offset)
+            output[i][j][2] = fit0_255(abs(np.inner(nb, mask)) + offset)
+
+    return output
