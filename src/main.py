@@ -1,6 +1,7 @@
 import numpy as np
 from PIL import Image
 from filters.median import median_filter
+from src.reader.reader import reader
 from utils.rgb2yiq import rgb2yiq
 
 dancingInWater = Image.open(('../images/DancingInWater.jpg')).convert('RGB')
@@ -11,4 +12,4 @@ output = median_filter(image, dim=(9, 9), pivot=(4, 4), use_zero=True)
 i_output = Image.fromarray(output)
 i_output.show()
 
-print(rgb2yiq((255, 255, 0)))
+data = reader('../files/example2.txt')

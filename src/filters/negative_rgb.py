@@ -1,7 +1,21 @@
-def negative_rgb(image: np.Array):
-    output = copy(image)
+from numpy import ndarray
+from PIL import Image
+import numpy as np
 
-    for i in range(len(image)):
-        for j in range(len(image[0])):
-            output[i][j] = rgb2yiq(image[i][j])
+def negative_rgb(image: ndarray):
+    # Nova imagem
+    negative_image = []
+
+    for line in image:
+        new_line = []
+        for pixel in line:
+            r, g, b = pixel[0], pixel[1], pixel[2]
+
+            # Novo pixel
+            new_line.append([255 - r, 255 - g, 255 - b])
+
+            # Nova linha
+        negative_image.append(new_line)
+
+    return negative_image
 
