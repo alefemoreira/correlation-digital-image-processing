@@ -1,7 +1,7 @@
-def neighborsRGB(v, pos, size, center, use_zero=True):
-    m, n = size
+def neighborsRGB(v, pos, dim, pivot, use_zero=True):
+    m, n = dim
     i, j = pos
-    i_0, j_0 = center
+    i_0, j_0 = pivot
 
     neighborsR = [None] * m * n
     neighborsG = [None] * m * n
@@ -34,3 +34,7 @@ def neighborsRGB(v, pos, size, center, use_zero=True):
             
 
     return (neighborsR, neighborsG, neighborsB)
+
+def correlation(image, mask, dim, pivot, offset=0, use_zero=True):
+    
+    pass
