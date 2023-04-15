@@ -1,7 +1,5 @@
 from numpy import ndarray
-from ..utils.rgb2yiq import rgb2yiq
-
-
+from ..reader import reader
 def negative_rgb(image: ndarray):
     # Nova imagem
     negative_image = []
@@ -20,5 +18,5 @@ def negative_rgb(image: ndarray):
     return negative_image
 
 
-# if __name__ == "__main__":
-    image_np = np.array(image, 'uint8')
+if __name__ == "__main__":
+    reader

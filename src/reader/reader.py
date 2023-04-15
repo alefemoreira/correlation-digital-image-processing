@@ -1,4 +1,9 @@
+import numpy as np
+from PIL import Image
+import os
+
 def reader(path: str) -> dict:
+
     mask_data = {}
 
     with open(path, 'r') as file:
@@ -25,13 +30,20 @@ def reader(path: str) -> dict:
         for element in pivot.split(" "):
             mask_data['pivot'].append(int(element))
 
-        # image path
+        # Caminho da imagem
         mask_data['image_path'] = lines[4].split(":")[1].replace("\n", "")
 
-        # image path
+        # offset
         mask_data['offset'] = int(lines[5].split(":")[1].replace("\n", ""))
 
-    print(mask_data)
+
+        # imagem em formato ndarray
+        image = Image.open(mask_data['image_path'])
+        mask_data['image_nd'] = np.array(image, 'uint8')
+
+        # dimensão da imagem
+        mask_data['dim_image'] = [len(mask_data['image_nd']), len(mask_data['image_nd'][0])]
+
     return mask_data
 
 
