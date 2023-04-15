@@ -1,5 +1,7 @@
 from numpy import ndarray
-from ..reader import reader
+from PIL import Image
+import numpy as np
+
 def negative_rgb(image: ndarray):
     # Nova imagem
     negative_image = []
@@ -17,6 +19,3 @@ def negative_rgb(image: ndarray):
 
     return negative_image
 
-
-if __name__ == "__main__":
-    reader
