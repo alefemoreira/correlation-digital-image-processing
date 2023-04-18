@@ -1,6 +1,5 @@
 from numpy import ndarray
-from PIL import Image
-import numpy as np
+
 
 def negative_rgb(image: ndarray):
     # Nova imagem
@@ -14,8 +13,7 @@ def negative_rgb(image: ndarray):
             # Novo pixel
             new_line.append([255 - r, 255 - g, 255 - b])
 
-            # Nova linha
+        # Nova linha
         negative_image.append(new_line)
 
     return negative_image
-
