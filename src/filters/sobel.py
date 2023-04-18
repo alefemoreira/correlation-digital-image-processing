@@ -1,9 +1,9 @@
-from statistics import correlation
+from utils.correlation import correlation
 
 import numpy as np
-from src.utils import hist_expansion
+from utils.hist_expansion import hist_expansion
 
-from src.utils.stats import fit0_255
+from utils.stats import fit0_255
 
 def sobel(image, offset=0, use_zero=True):
     output = np.array(image, 'uint8')
@@ -15,9 +15,9 @@ def sobel(image, offset=0, use_zero=True):
     for i in range(len(image)):
         for j in range(len(image[0])):
             r1, g1, b1 = h[i][j]
-            r2, g2, b2 = v[i][j]
+            r2, g2, b2 = (0,0,0) #v[i][j]
             output[i][j] = (fit0_255(r1 + r2), fit0_255(g1 + g2), fit0_255(b1 + b2))
     
-    hist_expansion(output)
+    # hist_expansion(output)
 
     return output

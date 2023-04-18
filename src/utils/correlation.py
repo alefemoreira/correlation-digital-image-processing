@@ -1,8 +1,8 @@
 import numpy as np
+from numba import jit, prange
+from utils.stats import fit0_255
 
-from src.utils.stats import fit0_255
-
-
+@jit(parallel=True)
 def neighborsRGB(v, pos, dim, pivot, use_zero=True):
     m, n = dim
     i, j = pos
@@ -40,13 +40,13 @@ def neighborsRGB(v, pos, dim, pivot, use_zero=True):
 
     return (neighborsR, neighborsG, neighborsB)
 
+@jit(parallel=True)
 def correlation(image, mask, dim, pivot, offset=0, use_zero=True):
     output = np.array(image, 'uint8')
 
-    for i in range(len(image)):
-        for j in range(len(image[0])):
+    for i in prange(len(image)):
+        for j in prange(len(image[0])):
             neighbors = neighborsRGB(image, (i,j), dim, pivot, use_zero)
-
             if neighbors == None:
                 output[i][j] = (0, 0, 0)
                 continue    
