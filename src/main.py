@@ -3,6 +3,7 @@ from PIL import Image
 from filters.median import median_filter
 from src.reader.reader import read
 from src.filters.box import box_11x11, box_1x11_11x1
+from src.filters.negative_rgb import negative_rgb
 from utils.rgb2yiq import rgb2yiq
 
 # dancingInWater = Image.open(('../images/DancingInWater.jpg')).convert('RGB')
@@ -13,7 +14,8 @@ from utils.rgb2yiq import rgb2yiq
 
 data = read('../files/example2.txt')
 # output = box_1x11_11x1(data['image_nd'])
-output = box_1x11_11x1(data['image_nd'])
+#output = box_1x11_11x1(data['image_nd'])
+output = negative_rgb(data['image_nd'])
 
 
 i_output = Image.fromarray(output)

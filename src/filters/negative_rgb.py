@@ -2,6 +2,12 @@ from numpy import ndarray
 
 
 def negative_rgb(image: ndarray):
+    """
+    Recebe uma imagem e aplica o negativo nas 3 bandas de cores
+
+    :param image: Um ndarray que representa a imagem a ser tratada
+    :return: Um ndarray com o negativo nas 3 bandas
+    """
     # Nova imagem
     negative_image = []
 
