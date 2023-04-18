@@ -2,7 +2,7 @@ import numpy as np
 from PIL import Image
 import os
 
-def reader(path: str) -> dict:
+def read(path: str) -> dict:
 
     mask_data = {}
 
@@ -48,4 +48,5 @@ def reader(path: str) -> dict:
 
 
 if __name__ == "__main__":
-    reader('../../files/example2.txt')
+    data = read('../../files/example2.txt')
+    print(data)
