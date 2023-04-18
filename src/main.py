@@ -12,6 +12,7 @@ from utils.rgb2yiq import rgb2yiq
 
 
 data = read('../files/example2.txt')
+# output = box_1x11_11x1(data['image_nd'])
 output = box_1x11_11x1(data['image_nd'])
 
 
