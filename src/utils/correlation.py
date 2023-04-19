@@ -1,10 +1,6 @@
 import numpy as np
-# from numba import jit, prange
 from utils.stats import fit0_255
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
-
-from utils.stats import fit0_255
 
 
 def neighborsRGB(v, pos, dim, pivot, use_zero=True):
