@@ -20,9 +20,9 @@ def negY(image: ndarray):
 
       # Conversão para YIQ com Y negativo
       y,i,q = rgb2yiq((r,g,b))
-      #operação para aplicar o negativo na banda Y
+      # Operação para aplicar o negativo na banda Y
       y = y-255
-      # Conversao para RGB
+      # Conversão para RGB
       r,g,b = yiq2rgb((y,i,q))
       # Normalização dos limites
       r,g,b = normaliza(r,g,b)
