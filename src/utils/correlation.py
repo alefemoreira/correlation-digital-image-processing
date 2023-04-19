@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.utils.stats import fit0_255
+from utils.stats import fit0_255
 
 
 def neighborsRGB(v, pos, dim, pivot, use_zero=True):

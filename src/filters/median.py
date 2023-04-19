@@ -1,6 +1,6 @@
 import numpy as np
-from src.utils.stats import median
-from src.utils.correlation import neighborsRGB
+from utils.stats import median
+from utils.correlation import neighborsRGB
 
 def median_filter(image, dim, pivot, use_zero=True):
     m, n = dim

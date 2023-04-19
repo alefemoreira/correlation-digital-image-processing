@@ -1,7 +1,7 @@
 import time
 from numpy import ndarray
 from PIL import Image
-from src.utils.correlation import correlation
+from utils.correlation import correlation
 
 
 def box_11x11(image: ndarray, offset=0, use_zero=True):
