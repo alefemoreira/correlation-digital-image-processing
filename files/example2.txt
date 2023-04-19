@@ -2,5 +2,5 @@ TYPE:MEDIAN
 MASK:1 2 3 4 5 6 7 8 9
 SIZE:3 3
 PIVOT:1 1
-FILE:../images/parrots.jpeg
+FILE:images/Lenna.png
 OFFSET:20
