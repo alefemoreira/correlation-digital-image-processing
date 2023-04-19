@@ -7,23 +7,23 @@ from reader.reader import read
 from filters.box import box_11x11, box_1x11_11x1
 from filters.negative_rgb import negative_rgb
 from utils.rgb2yiq import rgb2yiq
-from utils.correlation import correlation
+from utils.correlation import icorrelation, correlation
 
-dancingInWater = Image.open(('images/testpat.1k.color2.tif')).convert('RGB')
+dancingInWater = Image.open(('images/DancingInWater.jpg')).convert('RGB')
 image = np.array(dancingInWater, 'uint8')
 
 start = time()
-output = correlation(image , [1/11] * 11, (11, 1), (5, 0))
-output = correlation(output, [1/11] * 11, (1, 11), (0, 5))
-print(f'end: {time() - start}')
+output = correlation(image , [1/25] * 25, (5, 5), (1, 1))
+print(f'end seq: {time() - start}')
 start = time()
-output1 = correlation(output, [1/121] * 121, (11, 11), (5, 5))
-print(f'end1: {time() - start}')
+output1 = icorrelation(image , [1/25] * 25, (5, 5), (1, 1))
+print(f'end con: {time() - start}')
 
 i_output = Image.fromarray(output)
-i_output1 = Image.fromarray(output1)
 i_output.show()
-i_output1.show()
-i_output.save('images/output.jpeg')
 
-data = reader('files/example2.txt')
+i_output1 = Image.fromarray(output1)
+i_output1.show()
+# i_output.save('images/output.jpeg')
+
+# data = read('files/example2.txt')

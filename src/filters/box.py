@@ -1,7 +1,14 @@
 import time
 from numpy import ndarray
-from PIL import Image
 from utils.correlation import correlation
+
+
+def box(image, dim, offset, use_zero):
+    m, n = dim
+    o = correlation(image, [1/m] * m, (m, 1), (m // 2, 0), offset, use_zero)
+    output = correlation(o, [1/n] * n, (1, n), (0, n // 2), offset, use_zero)
+
+    return output
 
 
 def box_11x11(image: ndarray, offset=0, use_zero=True):
@@ -47,6 +54,7 @@ def box_1x11_11x1(image: ndarray, offset=0, use_zero=True):
         out_image, [1 / 11] * 11, (11, 1), (6, 1), offset, use_zero)
 
     end = time.time()
-    print("Tempo de execução do filtro Box11x1(Box1x11(Image)): ", end - start , ' segundos')
+    print("Tempo de execução do filtro Box11x1(Box1x11(Image)): ",
+          end - start, ' segundos')
 
     return out_image
