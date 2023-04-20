@@ -1,0 +1,3 @@
+TYPE:NEGY
+FILE:images/testpat.1k.color2.tif
+OUTPUT:images/output_neg_y.jpeg

@@ -15,8 +15,9 @@ def sobel(image, offset=0, use_zero=True):
     for i in range(len(image)):
         for j in range(len(image[0])):
             r1, g1, b1 = h[i][j]
-            r2, g2, b2 = (0, 0, 0)  # v[i][j]
+            r2, g2, b2 = v[i][j]
             output[i][j] = (fit0_255(r1 + r2),
-                            fit0_255(g1 + g2), fit0_255(b1 + b2))
+                            fit0_255(g1 + g2),
+                            fit0_255(b1 + b2))
 
     return histogram_expansion(output)

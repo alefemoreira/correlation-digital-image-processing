@@ -1,0 +1,4 @@
+TYPE:EMBOSS
+FILE:images/testpat.1k.color2.tif
+OUTPUT:images/output_emboss.jpeg
+OFFSET:128

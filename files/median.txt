@@ -1,0 +1,4 @@
+TYPE:MEDIAN
+MDIM:3 3
+FILE:images/testpat.1k.color2.tif
+OUTPUT:images/output_emboss.jpeg

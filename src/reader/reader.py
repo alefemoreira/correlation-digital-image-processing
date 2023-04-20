@@ -1,50 +1,111 @@
 import numpy as np
 from PIL import Image
-import os
+from filters.median import median_filter
+from filters.rgb2yiq2rgb import rgb2yiq2rgb
+from filters.sobel import sobel
+from filters.emboss import emboss
+from filters.box import box
+from filters.negative_rgb import negative_rgb
+from filters.negative_y import negY
+from utils.correlation import correlation
+
 
 def read(path: str) -> dict:
-
-    mask_data = {}
-
+    data = {}
     with open(path, 'r') as file:
         lines = file.readlines()
 
-        # mask type
-        mask_data['mask_type'] = lines[0].split(":")[1].replace("\n", "")
+        for line in lines:
+            if 'TYPE' in line:
+                data['type'] = line.strip().split(":")[-1]
+                pass
+            if 'MASK' in line:
+                data['mask'] = np.fromstring(
+                    line.strip().split(":")[-1], dtype=int, sep=' ')
+                pass
+            if 'MDIM' in line:
+                data['dim'] = np.fromstring(
+                    line.strip().split(":")[-1], dtype=int, sep=' ')
+                pass
+            if 'PIVOT' in line:
+                data['pivot'] = np.fromstring(
+                    line.strip().split(":")[-1], dtype=int, sep=' ')
+                pass
+            if 'FILE' in line:
+                filepath = line.strip().split(":")[-1]
+                image = Image.open(filepath).convert("RGB")
+                imagenp = np.array(image, 'uint8')
 
-        # mask
-        mask = lines[1].split(":")[1].replace("\n", "")
-        mask_data["mask"] = []
-        for element in mask.split(" "):
-            mask_data['mask'].append(float(element))
+                data['filepath'] = filepath
+                data['image'] = image
+                data['imagenp'] = imagenp
+                pass
+            if 'OFFSET' in line:
+                data['offset'] = int(line.strip().split(":")[-1])
+                pass
+            if 'OUTPUT' in line:
+                data['output'] = line.strip().split(":")[-1]
+                pass
 
-        # mask_size
-        mask_size = lines[2].split(":")[1].replace("\n", "")
-        mask_data["mask_size"] = []
-        for element in mask_size.split(" "):
-            mask_data['mask_size'].append(int(element))
-
-        # pivot
-        pivot = lines[3].split(":")[1].replace("\n", "")
-        mask_data["pivot"] = []
-        for element in pivot.split(" "):
-            mask_data['pivot'].append(int(element))
-
-        # Caminho da imagem
-        mask_data['image_path'] = lines[4].split(":")[1].replace("\n", "")
-
-        # offset
-        mask_data['offset'] = int(lines[5].split(":")[1].replace("\n", ""))
+    return data
 
 
-        # imagem em formato ndarray
-        image = Image.open(mask_data['image_path'])
-        mask_data['image_nd'] = np.array(image, 'uint8')
+def filter_image(data: dict) -> np.ndarray:
+    if data['type'] == 'MEDIAN':
+        image = data['imagenp']
+        pivot = data['pivot']
+        dim = data['dim']
+        return median_filter(image, dim, pivot, use_zero=True)
 
-        # dimensão da imagem
-        mask_data['dim_image'] = [len(mask_data['image_nd']), len(mask_data['image_nd'][0])]
+    if data['type'] == 'SOBEL':
+        image = data['imagenp']
+        offset = data['offset']
+        return sobel(image, offset)
 
-    return mask_data
+    if data['type'] == 'EMBOSS':
+        image = data['imagenp']
+        offset = data['offset']
+        return emboss(image, offset)
+
+    if data['type'] == 'SUM':
+        image = data['imagenp']
+        pivot = data['pivot']
+        dim = data['dim']
+        m, n = dim
+        offset = data['offset']
+        return correlation(
+            image=image,
+            mask=[1] * m * n,
+            dim=dim,
+            pivot=pivot,
+            offset=offset,
+            use_zero=True
+        )
+
+    if data['type'] == 'BOX':
+        image = data['imagenp']
+        dim = data['dim']
+        return box(image=image, dim=dim, use_zero=True)
+
+    if data['type'] == 'RYR':
+        image = data['imagenp']
+        return rgb2yiq2rgb(image=image)
+
+    if data['type'] == 'CORR':
+        image = data['imagenp']
+        pivot = data['pivot']
+        dim = data['dim']
+        mask = data['mask']
+        offset = data['offset']
+        return correlation(image, mask=mask, pivot=pivot, dim=dim, offset=offset, use_zero=True)
+
+    if data['type'] == 'NEGY':
+        image = data['imagenp']
+        return negY(image)
+
+    if data['type'] == 'NEG':
+        image = data['imagenp']
+        return negative_rgb(image)
 
 
 if __name__ == "__main__":

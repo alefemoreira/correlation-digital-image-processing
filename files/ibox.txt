@@ -1,0 +1,4 @@
+TYPE:BOX
+MDIM:11 11
+FILE:images/testpat.1k.color2.tif
+OUTPUT:images/output_sobel_v.jpeg

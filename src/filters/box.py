@@ -3,10 +3,10 @@ from numpy import ndarray
 from utils.correlation import correlation
 
 
-def box(image, dim, offset, use_zero):
+def box(image, dim, use_zero):
     m, n = dim
-    o = correlation(image, [1/m] * m, (m, 1), (m // 2, 0), offset, use_zero)
-    output = correlation(o, [1/n] * n, (1, n), (0, n // 2), offset, use_zero)
+    o = correlation(image, [1/m] * m, (m, 1), (m // 2, 0), 0, use_zero)
+    output = correlation(o, [1/n] * n, (1, n), (0, n // 2), 0, use_zero)
 
     return output
 

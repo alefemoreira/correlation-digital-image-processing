@@ -4,7 +4,7 @@ from PIL import Image
 from utils.rgb2yiq import  rgb2yiq
 from utils.yiq2rgb import  yiq2rgb
 from utils import  y_inversion
-from utils.stats import normaliza
+from utils.stats import fit0_255
 
 def negY(image: ndarray):
   """

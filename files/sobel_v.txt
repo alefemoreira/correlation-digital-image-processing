@@ -1,0 +1,7 @@
+TYPE:CORR
+MASK:-1 -2 -1 0 0 0 1 2 1
+MDIM:3 3
+PIVOT:1 1
+OFFSET:0
+FILE:images/testpat.1k.color2.tif
+OUTPUT:images/output_sobel_v.jpeg

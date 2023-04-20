@@ -1,4 +1,4 @@
-from stats import fit0_255
+from utils.stats import fit0_255
 
 def yiq2rgb(yiq):
     y, i, q = yiq
