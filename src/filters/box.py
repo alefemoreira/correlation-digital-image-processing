@@ -24,7 +24,7 @@ def box_11x11(image: ndarray, offset=0, use_zero=True):
 
     # [1/121]*121 vai repetir o 1/121 121 vezes no array da mascara
     out_image = correlation(
-        image, [1 / 121] * 121, (11, 11), (6, 6), offset, use_zero)
+        image, [1 / 121] * 121, (11, 11), (5, 5), offset, use_zero)
 
     end = time.time()
     print("Tempo de execução do filtro Box 11x11: ", end - start, ' segundos')
@@ -47,11 +47,11 @@ def box_1x11_11x1(image: ndarray, offset=0, use_zero=True):
 
     # Box 11x_1
     out_image = correlation(
-        image, [1 / 11] * 11, (1, 11), (1, 6), offset, use_zero)
+        image, [1 / 11] * 11, (1, 11), (0, 5), offset, use_zero)
 
-    # Box 1x_11
+    # Box 0x_11
     out_image = correlation(
-        out_image, [1 / 11] * 11, (11, 1), (6, 1), offset, use_zero)
+        out_image, [1 / 11] * 11, (11, 1), (5, 1), offset, use_zero)
 
     end = time.time()
     print("Tempo de execução do filtro Box11x1(Box1x11(Image)): ",

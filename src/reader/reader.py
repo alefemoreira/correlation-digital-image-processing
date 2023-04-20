@@ -21,7 +21,7 @@ def read(path: str) -> dict:
                 pass
             if 'MASK' in line:
                 data['mask'] = np.fromstring(
-                    line.strip().split(":")[-1], dtype=int, sep=' ')
+                    line.strip().split(":")[-1], dtype=float, sep=' ')
                 pass
             if 'MDIM' in line:
                 data['dim'] = np.fromstring(

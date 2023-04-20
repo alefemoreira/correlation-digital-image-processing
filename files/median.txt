@@ -1,4 +1,5 @@
 TYPE:MEDIAN
 MDIM:3 3
-FILE:images/testpat.1k.color2.tif
-OUTPUT:images/output_emboss.jpeg
+FILE:images/parrots.jpeg
+PIVOT:1 1
+OUTPUT:images/output_median.jpeg

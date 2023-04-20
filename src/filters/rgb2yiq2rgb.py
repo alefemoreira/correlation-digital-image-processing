@@ -4,7 +4,8 @@ from utils.yiq2rgb import yiq2rgb
 
 def rgb2yiq2rgb(image):
     output = np.array(image)
-    r, c = image.shape()
+    r, c = len(image), len(image[0])
     for i in range(r):
-      for j in range(c):
-         output[i][j] = yiq2rgb(rgb2yiq(image[i][j]))
+        for j in range(c):
+            output[i][j] = yiq2rgb(rgb2yiq(image[i][j]))
+    return image

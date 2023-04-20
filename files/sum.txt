@@ -1,4 +1,6 @@
 TYPE:SUM
-MDIM: 3 3
+MDIM:3 3
+PIVOT:1 1
 FILE:images/testpat.1k.color2.tif
-OUTPUT:images/output_sobel_h.jpeg
+OFFSET:0
+OUTPUT:images/output_soma.jpeg
