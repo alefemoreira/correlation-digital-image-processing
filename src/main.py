@@ -8,10 +8,18 @@ if (len(argv) < 2):
     exit(0)
 
 data = read(argv[1])
+start = time()
 image = filter_image(data)
-Image.fromarray(image).save(data['output'])
+end = time()
 
-print(data)
+print(f'Tempo de execução: {end - start}')
+
+output = Image.fromarray(image)
+
+if 'output' in data.keys():
+    output.save(data['output'])
+else:
+    output.show()
 
 
 
