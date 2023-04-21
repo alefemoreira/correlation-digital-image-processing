@@ -11,22 +11,21 @@ def negY(image: np.ndarray):
   """
   
   output = np.array(image, 'uint8')
-  #percorro a imagem
+  # Percorrendo a imagem
   for i in range(len(image)):
     for j in range(len(image[0])):
       r,g,b = image[i][j] 
 
       Y,I,Q = rgb2yiq((r,g,b))
       
-      #operação para aplicar o negativo na banda Y
       
-      # Conversao para RGB
+      # Operação para aplicar o negativo na banda Y seguido da conversão para RGB
       r,g,b = yiq2rgb(y_inversion((Y,I,Q)))
       
       # Normalização dos limites
       r,g,b = normaliza(r,g,b)
       
-      #Add a imagem
+      # Novo pixel com Y invertido
       output[i][j] = [r,g,b]
 
   return output
