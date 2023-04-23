@@ -12,7 +12,7 @@ start = time()
 image = filter_image(data)
 end = time()
 
-print(f'Tempo de execução: {end - start}')
+print(f'Tempo de execução: {end - start} s')
 
 output = Image.fromarray(image)
 

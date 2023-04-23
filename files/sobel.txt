@@ -1,4 +1,4 @@
 TYPE:SOBEL
 FILE:images/testpat.1k.color2.tif
-OUTPUT:images/output_sobel_h.jpeg
+OUTPUT:images/output_sobel.jpeg
 OFFSET:0
