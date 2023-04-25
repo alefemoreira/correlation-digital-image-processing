@@ -22,10 +22,12 @@ def neighborsRGB(v, pos, dim, pivot, use_zero=True):
     neighborsG = [None] * m * n
     neighborsB = [None] * m * n
 
+    # Posicionando o pivot na posição correta da vizinhaça
     neighborsR[i_0 * n + j_0] = v[i][j][0]
     neighborsG[i_0 * n + j_0] = v[i][j][1]
     neighborsB[i_0 * n + j_0] = v[i][j][2]
 
+    # Percorrendo a mascara
     for _i in range(0, m):
         deltaM = _i - i_0
         for _j in range(0, n):
@@ -45,6 +47,7 @@ def neighborsRGB(v, pos, dim, pivot, use_zero=True):
                 neighborsB[_i * n + _j] = 0
                 continue
 
+            # Adicionando o valor de cada pixel da vizinhaça
             neighborsR[_i * n + _j] = v[i + deltaM][j + deltaN][0]
             neighborsG[_i * n + _j] = v[i + deltaM][j + deltaN][1]
             neighborsB[_i * n + _j] = v[i + deltaM][j + deltaN][2]
