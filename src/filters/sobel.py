@@ -7,9 +7,9 @@ import numpy as np
 
 def sobel(image, offset=0, use_zero=True):
     output = np.array(image, 'uint8')
-    h = correlation(
-        image, [-1, 0, 1, -2, 0, 2, -1, 0, 1], (3, 3), (1, 1), offset, use_zero)
     v = correlation(
+        image, [-1, 0, 1, -2, 0, 2, -1, 0, 1], (3, 3), (1, 1), offset, use_zero)
+    h = correlation(
         image, [-1, -2, -1, 0, 0, 0, 1, 2, 1], (3, 3), (1, 1), offset, use_zero)
 
     for i in range(len(image)):

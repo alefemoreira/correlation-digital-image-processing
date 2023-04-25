@@ -14,7 +14,7 @@ def median_filter(image, dim, pivot, use_zero=True):
             neighbors = neighborsRGB(image, (i, j), dim, pivot, use_zero)
             if neighbors == None:
                 output[i][j] = (0, 0, 0)
-                return
+                continue
 
             r, g, b = neighbors
             output[i][j][0] = np.median(r)

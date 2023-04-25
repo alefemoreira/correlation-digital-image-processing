@@ -4,9 +4,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 def neighborsRGB(v, pos, dim, pivot, use_zero=True):
-    m, n = dim
-    i, j = pos
-    i_0, j_0 = pivot
+    m, n = dim # m linhas e n colunas
+    i, j = pos # pixel (i, j) q está sendo processado
+    i_0, j_0 = pivot # posição i0, j0 do pivot na MASCARA
 
     neighborsR = [None] * m * n
     neighborsG = [None] * m * n
