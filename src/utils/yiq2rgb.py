@@ -1,5 +1,9 @@
 from utils.stats import fit0_255
 
+"""
+recebe uma tupla yiq com as componentes de cor YIQ de um pixel de imagem e 
+retorna uma nova tupla com as correspondentes componentes de cor RGB normalizadas.
+"""
 def yiq2rgb(yiq):
     y, i, q = yiq
 

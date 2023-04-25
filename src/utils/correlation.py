@@ -3,6 +3,16 @@ from utils.stats import fit0_255
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
+"""
+A função neighborsRGB recebe uma matriz de pixels de imagem, uma posição de pixel (i, j), 
+as dimensões da máscara dim, um ponto central da máscara pivot, e um sinalizador use_zero que 
+indica se os pixels fora dos limites da imagem devem ser preenchidos com zeros. A função retorna 
+uma tupla com três listas, que contêm os valores dos canais R, G e B dos pixels na vizinhança da 
+posição (i, j) e do tamanho especificado pela máscara. A lista central é preenchida com o valor do 
+pixel na posição (i, j), e os demais pixels da lista são preenchidos com zeros, se estiverem fora 
+dos limites da imagem e use_zero=True. Se use_zero=False, a função retorna None se algum dos pixels 
+estiver fora dos limites da imagem.
+"""
 def neighborsRGB(v, pos, dim, pivot, use_zero=True):
     m, n = dim # m linhas e n colunas
     i, j = pos # pixel (i, j) q está sendo processado
@@ -40,6 +50,13 @@ def neighborsRGB(v, pos, dim, pivot, use_zero=True):
     return (neighborsR, neighborsG, neighborsB)
 
 
+"""
+A função correlation recebe uma matriz de pixels de imagem, uma máscara, as dimensões da máscara dim, 
+um ponto central da máscara pivot, um valor de deslocamento offset e um sinalizador use_zero. A função 
+itera sobre cada pixel da imagem e aplica a máscara para obter um valor de correlação para cada canal 
+de cor R, G e B. Os valores são limitados entre 0 e 255 usando a função fit0_255, e os valores resultantes 
+são atribuídos a um novo pixel de saída na mesma posição da imagem original.
+"""
 def correlation(image, mask, dim, pivot, offset=0, use_zero=True):
     output = np.array(image, 'uint8')
 
@@ -59,6 +76,11 @@ def correlation(image, mask, dim, pivot, offset=0, use_zero=True):
     return output
 
 
+"""
+A função correlation_quadrant é semelhante à correlation, mas é otimizada para ser executada em paralelo. 
+Em vez de iterar sobre todos os pixels da imagem, a função itera sobre uma seção retangular da imagem, 
+definida pelos pontos inicial e final. Esta função é chamada por threads em paralelo na função icorrelation.
+"""
 def correlation_quadrant(image, start_pixel, end_pixel, mask, dim, pivot, offset, use_zero, output):
     for i in range(start_pixel[0], end_pixel[0]):
         for j in range(start_pixel[1], end_pixel[1]):
@@ -74,6 +96,12 @@ def correlation_quadrant(image, start_pixel, end_pixel, mask, dim, pivot, offset
             output[i][j][2] = fit0_255(abs(np.inner(nb, mask)) + offset)
 
 
+
+""""
+A função icorrelation é semelhante à correlation, mas divide a imagem em quatro seções retangulares iguais e 
+chama a função correlation_quadrant em cada seção em paralelo, usando a biblioteca 
+concurrent.futures.ThreadPoolExecutor. A função retorna a imagem de saída com a correlação aplicada.
+"""
 def icorrelation(image, mask, dim, pivot, offset=0, use_zero=True):
     output = np.array(image, 'uint8')
     r = len(image)
