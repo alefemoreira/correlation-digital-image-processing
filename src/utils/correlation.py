@@ -2,7 +2,6 @@ import numpy as np
 from utils.stats import fit0_255
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-
 """
 A função neighborsRGB recebe uma matriz de pixels de imagem, uma posição de pixel (i, j), 
 as dimensões da máscara dim, um ponto central da máscara pivot, e um sinalizador use_zero que 

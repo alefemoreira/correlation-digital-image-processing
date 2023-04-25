@@ -2,7 +2,12 @@ import time
 from numpy import ndarray
 from utils.correlation import correlation
 
-
+"""
+A função box(image, dim, use_zero) aplica um filtro de média de ordem dim em uma imagem image, considerando 
+a vizinhança definida por dim. A função retorna a imagem resultante.A função box(image, dim, use_zero) aplica 
+um filtro de média de ordem dim em uma imagem image, considerando a vizinhança definida por dim. A função retorna 
+a imagem resultante.
+"""
 def box(image, dim, use_zero):
     m, n = dim
     o = correlation(image, [1/m] * m, (m, 1), (m // 2, 0), 0, use_zero)
@@ -11,6 +16,11 @@ def box(image, dim, use_zero):
     return output
 
 
+"""
+A função box_11x11(image: ndarray, offset=0, use_zero=True) aplica um filtro de média de ordem 11 em uma 
+imagem image, utilizando a função correlation() para realizar a operação de filtragem. A função retorna a 
+imagem resultante, e mede o tempo de execução da operação.
+"""
 def box_11x11(image: ndarray, offset=0, use_zero=True):
     """
     Recebe uma imagem em formato ndarray e aplica o filtro box 11x11
