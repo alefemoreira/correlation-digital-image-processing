@@ -7,7 +7,7 @@ if (len(argv) < 2):
     print('insira o caminho do arquivo')
     exit(0)
 
-data = read(argv[1])
+data = read(argv[1]) # Lendo o arquivo com uma função própria
 start = time()
 image = filter_image(data)
 end = time()

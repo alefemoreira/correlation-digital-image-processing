@@ -10,6 +10,14 @@ inversão das componentes de cor originais. Essa operação de inversão é para
 ou inversão de cores.
 """
 def rgb_inversion(rgb):
+    """retorna um pixel com cores invertidas
+
+    Args:
+        rgb (tuple): pixel a ser invertido
+
+    Returns:
+        tuple: pixel invertido
+    """
     r, g, b = rgb
 
     return (255 - r, 255 - g, 255 - b)

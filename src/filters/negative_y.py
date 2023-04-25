@@ -6,11 +6,17 @@ from utils.y_inversion import  y_inversion
 from utils.stats import normaliza
 
 def negY(image: np.ndarray):
-  """
-    Recebe uma imagem em formato ndarray e retorna esse mesmo ndarray com a conversão aplicada
+  """Recebe uma imagem em formato ndarray e retorna esse mesmo ndarray com a conversão aplicada
+
+  Args:
+      image (np.ndarray): Imagem em formato em ndarray
+
+  Returns:
+      ndarray: Imagem em formato ndarray com negativo em Y aplicado
   """
   
   output = np.array(image, 'uint8')
+
   # Percorrendo a imagem
   for i in range(len(image)):
     for j in range(len(image[0])):

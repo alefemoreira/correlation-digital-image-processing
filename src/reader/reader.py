@@ -11,10 +11,21 @@ from utils.correlation import correlation
 
 
 def read(path: str) -> dict:
+    """Recebe o caminho de um arquivo de configuração e retorna em forma de dicionário todos os dados que serão
+       usados no filtro
+
+    Args:
+        path (str): Caminho do arquivo
+
+    Returns:
+        dict: Dicionário com os dados que serão usados no filtro
+    """
+
     data = {}
     with open(path, 'r') as file:
         lines = file.readlines()
 
+        # Percorrendo linha a linha do arquivo de configuração e verificando os pârametros de configuração
         for line in lines:
             if 'TYPE' in line:
                 data['type'] = line.strip().split(":")[-1]
@@ -51,6 +62,15 @@ def read(path: str) -> dict:
 
 
 def filter_image(data: dict) -> np.ndarray:
+    """ Recebe um dicionário de configurações e aplica um procedimento a depender do type presente
+        presente na configuração
+
+    Args:
+        data (dict): Dicionário de configuração
+
+    Returns:
+        np.ndarray: Imagem em formato np.ndarray
+    """
     if data['type'] == 'MEDIAN':
         image = data['imagenp']
         pivot = data['pivot']
@@ -60,12 +80,12 @@ def filter_image(data: dict) -> np.ndarray:
     if data['type'] == 'SOBEL':
         image = data['imagenp']
         offset = data['offset']
-        return sobel(image, offset)
+        return sobel(image, offset) #ok
 
     if data['type'] == 'EMBOSS':
         image = data['imagenp']
         offset = data['offset']
-        return emboss(image, offset)
+        return emboss(image, offset) #ok
 
     if data['type'] == 'SUM':
         image = data['imagenp']
@@ -75,7 +95,7 @@ def filter_image(data: dict) -> np.ndarray:
         offset = data['offset']
         return correlation(
             image=image,
-            mask=[1] * m * n,
+            mask=[1] * m * n, # mascara de mxn composta de apenas 1's
             dim=dim,
             pivot=pivot,
             offset=offset,
@@ -89,7 +109,7 @@ def filter_image(data: dict) -> np.ndarray:
 
     if data['type'] == 'RYR':
         image = data['imagenp']
-        return rgb2yiq2rgb(image=image)
+        return rgb2yiq2rgb(image=image) #ok
 
     if data['type'] == 'CORR':
         image = data['imagenp']
@@ -101,11 +121,11 @@ def filter_image(data: dict) -> np.ndarray:
 
     if data['type'] == 'NEGY':
         image = data['imagenp']
-        return negY(image)
+        return negY(image) #ok 
 
     if data['type'] == 'NEG':
         image = data['imagenp']
-        return negative_rgb(image)
+        return negative_rgb(image) #ok
 
 
 if __name__ == "__main__":

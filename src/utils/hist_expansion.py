@@ -27,13 +27,13 @@ que é o número de níveis de intensidade que a imagem resultante deve ter. A f
 a expansão do pixel r utilizando a fórmula de expansão de histograma, arredonda 
 o resultado para o inteiro mais próximo e retorna o valor resultante.
 """
-def calc_expansion(r, r_min, r_max, l):
+def calc_expansion(r, r_min, r_max, l):    
 
     # Força número real para garantir resultados matemáticos corretos
     # Se r_max for um número inteiro, o cálculo pode perder a precisão
     r_max = float(r_max)
 
-    return np.round(((r - r_min) / (r_max - r_min)) * (l - 1))
+    return np.round(((r - r_min) / (r_max - r_min)) * (l - 1)) # Formula da expansão de histograma
 
 
 """
@@ -47,15 +47,17 @@ def histogram_expansion(image: ndarray, l=256):
     
     output = np.zeros_like(image)
 
-    # Image width and height
+    # Image largura e altura
     iw = image.shape[1]
     ih = image.shape[0]
 
     #A função começa obtendo os valores máximo e mínimo de cada banda de cores da imagem original
     maxR = image[:, :, 0].max()
     minR = image[:, :, 0].min()
+
     maxG = image[:, :, 1].max()
     minG = image[:, :, 1].min()
+
     maxB = image[:, :, 2].max()
     minB = image[:, :, 2].min()
 

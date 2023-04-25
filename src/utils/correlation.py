@@ -17,6 +17,7 @@ def neighborsRGB(v, pos, dim, pivot, use_zero=True):
     i, j = pos # pixel (i, j) q está sendo processado
     i_0, j_0 = pivot # posição i0, j0 do pivot na MASCARA
 
+    # Array de vizinhos
     neighborsR = [None] * m * n
     neighborsG = [None] * m * n
     neighborsB = [None] * m * n
@@ -33,9 +34,11 @@ def neighborsRGB(v, pos, dim, pivot, use_zero=True):
             jOutOfBound = j + deltaN < 0 or j + deltaN >= len(v[0])
             hasIndexOutOfBound = iOutOfBound or jOutOfBound
 
+            # Retorna None caso tenha vizinhaça fora da imagem e não tenha extensão por zero
             if hasIndexOutOfBound and not use_zero:
                 return None
 
+            # Zerando a vizinhaça com extensão por zero
             if hasIndexOutOfBound and use_zero:
                 neighborsR[_i * n + _j] = 0
                 neighborsG[_i * n + _j] = 0
@@ -61,13 +64,17 @@ def correlation(image, mask, dim, pivot, offset=0, use_zero=True):
 
     for i in range(len(image)):
         for j in range(len(image[0])):
+            # Buscando os vizinhos
             neighbors = neighborsRGB(image, (i, j), dim, pivot, use_zero)
+
+            # Caso os vizinhos sejam None não há a aplicação da mascara
             if neighbors == None:
                 output[i][j] = (0, 0, 0)
                 continue
 
             nr, ng, nb = neighbors  # nr, ng, nb -> neighborhood r, g, b
 
+            # Aplicando o produto interno entre a mascara e a imagem para cada banda
             output[i][j][0] = fit0_255(abs(np.inner(nr, mask)) + offset)
             output[i][j][1] = fit0_255(abs(np.inner(ng, mask)) + offset)
             output[i][j][2] = fit0_255(abs(np.inner(nb, mask)) + offset)
